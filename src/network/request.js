@@ -1,27 +1,47 @@
-import axios from 'axios'
+import axios from "axios";
+import qs from "qs";
+import { Toast } from "vant";
+import Loading from "../store/index";
 
-export function request (config) {
-  // 1.创建axios的实例
-  const instance = axios.create({
-    baseURL: 'http://123.207.32.32:8000',
-    timeout: 5000
-  })
+// 此接口为测试接口,真实接口请联系微信codeywhy001
+const url = "http://123.207.32.32:8000/api/hy";
+// const url = "http://106.54.54.237:8000/api/hy";
 
-  // 2.axios的拦截器
-  // 2.1.请求拦截的作用
-  instance.interceptors.request.use(config => {
-    return config
-  }, err => {
-    console.log(err)
-  })
+let config = {
+  baseURL: url
+};
 
-  // 2.2.响应拦截
-  instance.interceptors.response.use(res => {
-    return res.data
-  }, err => {
-    console.log(err)
-  })
+const _axios = axios.create(config);
 
-  // 3.发送真正的网络请求
-  return instance(config)
-}
+// 请求拦截
+_axios.interceptors.request.use(
+  req => {
+    // 当getters里面的isLoading为true再显示请求加载
+    if (Loading.getters.isLoading) {
+      Toast.loading({
+        forbidClick: true,
+        message: "加载中..."
+      });
+    }
+    return req;
+  },
+  err => {
+    return Promise.reject(err);
+  }
+);
+
+// 响应拦截
+_axios.interceptors.response.use(
+  res => {
+    Toast.clear();
+    return res.data;
+  },
+  err => {
+    Toast.clear();
+    return Promise.reject(err);
+  }
+);
+
+// 全局注册axios qs
+window.axios = _axios;
+window.qs = qs;
