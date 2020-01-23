@@ -2,7 +2,7 @@
   <div class="swiper-list">
     <van-swipe :autoplay="4000">
       <van-swipe-item :key="index" v-for="(item, index) in swiperList">
-        <img :src="item" @load="swiperLoad" alt="" />
+        <img :src="'http:' + item" @load="swiperLoad" alt="" />
       </van-swipe-item>
     </van-swipe>
   </div>

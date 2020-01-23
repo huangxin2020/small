@@ -1,7 +1,7 @@
 <template>
   <div class="profile">
     <nav-bar class="nav-bar">
-      <div slot="center">小码哥商城</div>
+      <div slot="center">购物商城</div>
     </nav-bar>
     <scroll class="scroll-height">
       <login :cur-login="isLogin" :phone="phone" :username="username" @goLogin="goLogin" ref="login" />

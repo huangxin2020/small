@@ -79,7 +79,7 @@ export default {
     this.getProductDetail();
     this.getRecommend();
   },
-  // 路由离开的时候恢复tabBar
+  // 路由离开的时候恢复tabBar -> 下选择框
   beforeRouteLeave(to, from, next) {
     this.$store.commit("setTabBarShow", true);
     next();
@@ -97,6 +97,7 @@ export default {
 
         // 获取轮播图数据
         this.topImages = data.itemInfo.topImages;
+        // console.log(this.topImages)
 
         // 获取商品数据,调用封装的ES6的class
         this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services);
@@ -107,7 +108,7 @@ export default {
         // 获取下面的图片展示数据
         this.detailsInfo = data.detailInfo;
 
-        // 获取尺寸数据
+        // 获取详细参数信息数据
         this.paramsInfo = new GoodsParams(data.itemParams.info, data.itemParams.rule || {});
 
         // 获取评论数据

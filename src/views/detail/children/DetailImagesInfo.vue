@@ -8,7 +8,7 @@
     <div :key="index" v-for="(item, index) in imagesInfo.detailImage">
       <div class="info-key">{{ item.key }}</div>
       <div class="info-list">
-        <img :key="imageIndex" :src="image" @load="imgLoad" alt="" v-for="(image, imageIndex) in item.list" />
+        <img :key="imageIndex" :src="'http:' + image" @load="imgLoad" alt="" v-for="(image, imageIndex) in item.list" />
       </div>
     </div>
   </div>
@@ -33,6 +33,7 @@ export default {
   },
   methods: {
     imgLoad() {
+      // 防止不能滚动 判断是否所有的图片都加载完成了，加载完成后进行一次回调
       if (++this.count === this.imagesLength) {
         this.$emit("imgLoad");
       }
@@ -40,6 +41,7 @@ export default {
   },
   watch: {
     imagesInfo() {
+      // 获取图片的个数 - 使用watch当值发生变化的时候 才会再一次执行 可以提升些性能
       this.imagesLength = this.imagesInfo.detailImage[0].list.length;
     }
   }

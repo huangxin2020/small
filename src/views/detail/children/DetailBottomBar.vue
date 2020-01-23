@@ -66,13 +66,13 @@ export default {
   height: 50px;
 }
 
-/deep/ .van-goods-action {
+.van-goods-action {
   line-height: 50px;
   height: 50px;
   border-top: 1px solid #cccccc;
 }
 
-/deep/ .van-goods-action-icon {
+.van-goods-action-icon {
   height: auto;
 }
 </style>

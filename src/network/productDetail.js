@@ -11,7 +11,8 @@ export function getRecommend() {
   }).catch(err => err);
 }
 
-// ES6的类,详情数据
+// 利用ES6的类方法,把从后端获取的商品需要展示在页面上详情数据 封装成一个商品对象
+// 方便在后面的使用中调取，后端服务器传输过来的数据太乱不方便调取的时候，就需要自己提取封装整合为一个对象
 export class Goods {
   constructor(itemInfo, columns, services) {
     this.title = itemInfo.title;
@@ -27,7 +28,7 @@ export class Goods {
   }
 }
 
-// 店铺数据
+// 封装店铺数据
 export class Shop {
   constructor(shopInfo) {
     this.logo = shopInfo.shopLogo;
@@ -39,7 +40,7 @@ export class Shop {
   }
 }
 
-// 尺寸数据
+// 封装参数信息数据
 export class GoodsParams {
   constructor(info, rule) {
     // 注: images可能没有值(某些商品有值, 某些没有值)
