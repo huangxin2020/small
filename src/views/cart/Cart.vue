@@ -13,7 +13,7 @@
     </nav-bar>
     <!-- 购物车列表 -->
     <cart-list @changShow="changShow"/>
-    <cart-delta-item v-show="isShow" @SubToCart="SubToCart"/>
+    <cart-delta-item v-show="isShow" @SubToCart="SubToCart" @CancelCart="CancelCart" />
   </div>
 </template>
 
@@ -47,14 +47,20 @@ export default {
       this.isShow = true;
       this.caritemindex = index;
     },
+    // 在购物车长按事件产生的函数
     // 删除购物车数据
     SubToCart () {
       let index = this.caritemindex
       this.isShow = false;
       this.cartList.splice(index,1);
-
+      // 更新购物车的商品列表信息
       this.clearCartList();
+    },
+    // 点击取消按钮
+    CancelCart () {
+      this.isShow = false;
     }
+
   },
   components: { 
     CartList, 
