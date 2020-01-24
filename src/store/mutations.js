@@ -1,6 +1,8 @@
 import { ADD_COUNTER, ADD_TO_CART, CLEAR_CART_LIST, SET_CART_LIST, SET_LOADING, SET_TABBAR_SHOW } from "./types";
 import { Toast } from "vant";
 
+// mutations唯一的目的就是修改state中的状态
+// mutations中的每一个方法尽可能完成的事件比较单一一点
 export default {
   // 设置tabBar显示和隐藏
   [SET_TABBAR_SHOW](state, bol) {
@@ -25,6 +27,7 @@ export default {
   // 往购物车push数据
   [ADD_TO_CART](state, data) {
     data.count = 1;
+    // 购物车的选择状态 默认下为不选择
     data.checked = false;
     state.cartList.push(data);
     Toast({

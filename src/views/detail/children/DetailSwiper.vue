@@ -37,19 +37,19 @@ export default {
 </script>
 
 <style scoped>
-.swiper-list /deep/ .van-swipe__indicator {
+.swiper-list  .van-swipe__indicator {
   width: 10px;
   height: 10px;
   opacity: 0.8;
   background-color: white;
 }
 
-.swiper-list /deep/ .van-swipe__indicator--active {
+.swiper-list  .van-swipe__indicator--active {
   background-color: red;
 }
 
 /* 取消vant的相对定位 */
-.swiper-list /deep/ .van-swipe {
+.swiper-list  .van-swipe {
   position: unset;
 }
 

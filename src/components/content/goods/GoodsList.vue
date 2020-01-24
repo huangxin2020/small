@@ -4,6 +4,7 @@
     <div class="goods-list">
       <!-- 循环部分 -->
       <div :key="index" @click="goodItemClick(item)" class="goods-list-item" v-for="(item, index) in goods">
+        <!-- v-lazy - 图片懒加载 -->
         <img @load="imgLoad" alt="" v-lazy="showImage(index)" />
         <div class="goods-info">
           <p>{{ item.title }}</p>

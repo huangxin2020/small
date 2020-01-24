@@ -105,7 +105,7 @@ export default {
         // 获取店铺数据
         this.shops = new Shop(data.shopInfo);
 
-        // 获取下面的图片展示数据
+        // 获取穿着展示图片数据
         this.detailsInfo = data.detailInfo;
 
         // 获取详细参数信息数据
@@ -124,12 +124,13 @@ export default {
         this.recommendList = res.data.list;
       });
     },
+    // 图片的加载
     imgLoad() {
       this.$refs.scroll.refresh();
       // 图片加载完获取classList
       this.getClassList();
     },
-    // navBar点击
+    // navBar点击屏幕滚动
     titleItemClick(index) {
       // 根据数组下标滚动到对应的元素内容位置
       let setScroll = Array.from(document.getElementsByClassName("detail-set-scroll"));
@@ -145,6 +146,8 @@ export default {
       this.detailClassList.push({ offsetTop: maxValue });
     },
     // 监听详情页滚动事件,并动态设置navBar的index
+    // 显示效果为 滚动到那个区域对应的navBar 也会高亮显示 内容与标题一致 - 联动效果
+    // 思路：用现在的区域高度与之前主题中的值进行对比 返回不同的index
     detailScroll(position) {
       let detailPosition = position ? -position.y : 0;
       this.curPosition = detailPosition;
@@ -172,7 +175,6 @@ export default {
         price: this.goods.lowNowPrice,
         id: this.detailId
       };
-
       // 2.将商品数据传到购物车页面
       this.$store.dispatch("setCateGoryData", obj);
     }

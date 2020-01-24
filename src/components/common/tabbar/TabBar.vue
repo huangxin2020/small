@@ -21,16 +21,16 @@ export default {
 </script>
 
 <style scoped>
-/deep/ .van-tabbar {
+ .van-tabbar {
   border-top: 1px solid #cccccc;
   background-color: #f6f6f6;
 }
 
-/deep/ .van-tabbar-item {
+ .van-tabbar-item {
   font-size: 13px;
 }
 
-/deep/ .van-tabbar-item__icon {
+ .van-tabbar-item__icon {
   font-size: 22px;
 }
 </style>

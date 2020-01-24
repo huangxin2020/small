@@ -15,8 +15,9 @@ function padLeftZero(str) {
   return ("00" + str).substr(str.length);
 }
 
-// 时间格式化
+// 时间格式化函数
 export function formatDate(date, fmt) {
+  // 获取年份
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
   }

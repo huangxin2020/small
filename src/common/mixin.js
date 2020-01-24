@@ -1,5 +1,6 @@
 import { debounce } from "./utils";
 
+// 对图片加载的监听混入
 export const imgListenerMixin = {
   data() {
     return {

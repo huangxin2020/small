@@ -2,12 +2,15 @@
   <div class="cart-list">
     <scroll class="scroll-height" ref="scroll">
       <!-- 循环部分 -->
-      <div :key="index" class="shop-item" v-for="(item, index) in cartList">
+      <div :key="index" class="shop-item" v-for="(item, index) in cartList" 
+      @touchstart="showDeleteButton(index)"
+      >
         <div class="item-selector">
+          <!-- vant 是Vue的组件库 -->
           <van-checkbox @change="itemChange" v-model="item.checked" />
         </div>
         <div class="item-img">
-          <img :src="item.image" alt="商品图片" />
+          <img :src="'http:' + item.image" alt="商品图片" />
         </div>
         <div class="item-info">
           <div class="item-title">{{ item.title }}</div>
@@ -48,7 +51,10 @@ export default {
   components: { Scroll },
   data() {
     return {
-      checkedAll: false
+      // 是都全选
+      checkedAll: false,
+      // 长按事件 用于清除定时器
+      Loop:null
     };
   },
   computed: {
@@ -110,7 +116,14 @@ export default {
             return false;
           });
       }
-    }
+    },
+    // 长按删除
+    showDeleteButton(index) {
+      clearTimeout(this.Loop); //再次清空定时器，防止重复注册定时器
+      this.Loop = setTimeout(function() {
+        this.$emit("changShow",index)
+      }.bind(this), 1000);
+    },
   },
   created() {
     // 每次刷新页面获取本地存储购物车数据
@@ -119,6 +132,7 @@ export default {
       this.setCartList(list);
     }
   },
+  // 防止滚动better-scroll 得不到高度导致不能滚动
   mounted() {
     // 刷新better-scroll
     this.$refs.scroll.refresh();

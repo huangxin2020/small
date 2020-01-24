@@ -18,6 +18,7 @@ const state = {
 export default new Vuex.Store({
   state,
   getters,
+  // 修改state中的状态
   mutations,
   // 异步操作或者复杂的操作放到actions
   actions
