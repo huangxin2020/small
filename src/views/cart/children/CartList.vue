@@ -4,9 +4,10 @@
       <!-- 循环部分 -->
       <div :key="index" class="shop-item" v-for="(item, index) in cartList" 
       @touchstart="showDeleteButton(index)" 
-      @touchmove="gotouchmove" 
       @touchend="gotouchend"
       >
+      <!-- @touchmove="gotouchmove" 
+      @touchend="gotouchend" -->
         <div class="item-selector">
           <!-- vant 是Vue的组件库 -->
           <van-checkbox @change="itemChange" v-model="item.checked" />
