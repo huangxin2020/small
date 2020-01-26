@@ -60,10 +60,16 @@ export default {
     },
     // 退出登录
     loginOut(){
-      this.curLogin = false
+      // 删除本地保存的登录信息来实现登出效果
+      localStorage.removeItem('shop_login');
+      // 使用路由跳转来刷新页面
+      this.$router.go(0);
     }
 
-  }
+  },
+  // mounted(){
+  //   this.mycurLogin = curLogin
+  // }
 };
 </script>
 

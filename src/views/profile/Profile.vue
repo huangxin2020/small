@@ -4,7 +4,9 @@
       <div slot="center">购物商城</div>
     </nav-bar>
     <scroll class="scroll-height">
-      <login :cur-login="isLogin" :phone="phone" :username="username" @goLogin="goLogin" ref="login" />
+      <login :cur-login="isLogin" :phone="phone" :username="username" 
+      @goLogin="goLogin"
+      ref="login" />
       <money />
       <div class="line"></div>
       <profile-list />
