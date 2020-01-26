@@ -82,8 +82,9 @@ export default {
           message: "QQ号不能为空"
         });
       } else {
+        // http://121.42.13.36/register.php
         axios
-          .post("http://121.42.13.36/register.php", qs.stringify(this.formData), {
+          .post("http://192.168.1.165:8080/register", qs.stringify(this.formData), {
             headers: {
               "Content-Type": "application/x-www-form-urlencoded"
             }

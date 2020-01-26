@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="profile-arrow-right">
-      <img alt="" src="@/assets/img/profile/arrow_right.png" />
+      <img alt="" src="@/assets/img/profile/arrow_right.png" @click="loginOut"/>
     </div>
   </div>
 </template>
@@ -57,7 +57,12 @@ export default {
       // console.log(file);
       this.defaultPic = file.content;
       localStorage.setItem("user_pic", JSON.stringify(this.defaultPic));
+    },
+    // 退出登录
+    loginOut(){
+      this.curLogin = false
     }
+
   }
 };
 </script>

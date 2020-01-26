@@ -3,8 +3,11 @@
     <scroll class="scroll-height" ref="scroll">
       <!-- 循环部分 -->
       <div :key="index" class="shop-item" v-for="(item, index) in cartList" 
-      @touchstart="showDeleteButton(index)"
+      @touchstart="showDeleteButton(index)" 
+      @touchend="gotouchend"
       >
+      <!-- @touchmove="gotouchmove" 
+      @touchend="gotouchend" -->
         <div class="item-selector">
           <!-- vant 是Vue的组件库 -->
           <van-checkbox @change="itemChange" v-model="item.checked" />
@@ -53,8 +56,8 @@ export default {
     return {
       // 是都全选
       checkedAll: false,
-      // 长按事件 用于清除定时器
-      Loop:null
+      // 清空定时器
+      Loop: null
     };
   },
   computed: {
@@ -117,12 +120,22 @@ export default {
           });
       }
     },
+    // 长按事件
+    // this.$emit("changShow",index)
     // 长按删除
     showDeleteButton(index) {
       clearTimeout(this.Loop); //再次清空定时器，防止重复注册定时器
       this.Loop = setTimeout(function() {
         this.$emit("changShow",index)
-      }.bind(this), 1000);
+    }.bind(this), 1000);
+
+    },
+    gotouchend(){
+      clearTimeout(this.Loop);
+    },
+    //如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按 
+    gotouchmove(){
+      clearTimeout(this.Loop);//清除定时器
     },
   },
   created() {
