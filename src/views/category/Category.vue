@@ -1,14 +1,16 @@
 <template>
   <div class="category">
-    <nav-bar class="category-nav-bar">
-      <div slot="center">商品分类</div>
-    </nav-bar>
-    <slide-bar :slide-bar-list="categoryList" @slideBarItemClick="slideBarItemClick" />
-    <scroll class="scroll-height">
-      <subcategory :category-list="subcategoryList[currentIndex]" />
-      <tab-control :titles="titleList" @tabClick="tabClick" ref="tabControl" />
-      <goods-list :goods="categoryDetailList" />
-    </scroll>
+    <v-touch v-on:swiperight="swiperright" class="container">
+      <nav-bar class="category-nav-bar">
+        <div slot="center">商品分类</div>
+      </nav-bar>
+      <slide-bar :slide-bar-list="categoryList" @slideBarItemClick="slideBarItemClick" />
+      <scroll class="scroll-height">
+        <subcategory :category-list="subcategoryList[currentIndex]" />
+        <tab-control :titles="titleList" @tabClick="tabClick" ref="tabControl" />
+        <goods-list :goods="categoryDetailList" />
+      </scroll>
+    </v-touch>
   </div>
 </template>
 
@@ -80,6 +82,10 @@ export default {
       const typeList = ["pop", "new", "sell"];
       // 切换类型数据
       this.getCategoryDetail(this.categoryList[this.currentIndex].miniWallkey, typeList[index]);
+    },
+    // 左边侧滑返回上一页
+    swiperright: function () {
+      this.$router.go(-1);
     }
   },
   created() {
@@ -106,5 +112,10 @@ export default {
   bottom: 50px;
   left: 100px;
   overflow: hidden;
+}
+/* 设置滑动范围的宽高 */
+.container{
+  width:100vw;
+  height:100vh;
 }
 </style>

@@ -1,19 +1,21 @@
 <template>
   <div class="cart">
-    <!-- 导航 -->
-    <nav-bar class="nav-bar">
-      <div @click="backTopPage" class="back-img" slot="left">
-        <img alt="" src="@/assets/img/common/back.svg" />
-      </div>
-      <div slot="center">
-        购物车(
-        <span>{{ cartListLength }}</span>
-        )
-      </div>
-    </nav-bar>
-    <!-- 购物车列表 -->
-    <cart-list @changShow="changShow"/>
-    <cart-delta-item v-show="isShow" @SubToCart="SubToCart" @CancelCart="CancelCart" />
+    <v-touch v-on:swiperight="swiperright" class="container">
+      <!-- 导航 -->
+      <nav-bar class="nav-bar">
+        <div @click="backTopPage" class="back-img" slot="left">
+          <img alt="" src="@/assets/img/common/back.svg" />
+        </div>
+        <div slot="center">
+          购物车(
+          <span>{{ cartListLength }}</span>
+          )
+        </div>
+      </nav-bar>
+      <!-- 购物车列表 -->
+      <cart-list @changShow="changShow"/>
+      <cart-delta-item v-show="isShow" @SubToCart="SubToCart" @CancelCart="CancelCart" />
+    </v-touch>
   </div>
 </template>
 
@@ -59,8 +61,11 @@ export default {
     // 点击取消按钮
     CancelCart () {
       this.isShow = false;
+    },
+    // 左边侧滑返回上一页
+    swiperright: function () {
+      this.$router.go(-1);
     }
-
   },
   components: { 
     CartList, 
@@ -78,5 +83,10 @@ export default {
 .nav-bar {
   color: white;
   background-color: #ff8198;
+}
+/* 设置滑动范围的宽高 */
+.container{
+  width:100vw;
+  height:100vh;
 }
 </style>

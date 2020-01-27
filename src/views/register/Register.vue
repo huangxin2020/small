@@ -1,39 +1,41 @@
 <template>
   <div class="register">
-    <!-- 标题栏 -->
-    <nav-bar class="login-nav">
-      <div slot="center">注册</div>
-    </nav-bar>
-    <div :class="{ error: !formData.username }" class="login-item">
-      <label for="username">用户名：</label>
-      <input id="username" placeholder="请输入用户名" type="text" v-model.trim="formData.username" />
-    </div>
-    <div :class="{ error: !formData.password }" class="login-item">
-      <label for="password">密码：</label>
-      <input id="password" placeholder="请输入密码" type="password" v-model.trim="formData.password" />
-    </div>
-    <div :class="{ error: !formData.phone }" class="login-item">
-      <label for="phone">手机号：</label>
-      <input id="phone" placeholder="请输入手机号" type="text" v-model.trim="formData.phone" />
-    </div>
-    <div :class="{ error: !formData.mail }" class="login-item">
-      <label for="mail">邮箱：</label>
-      <input id="mail" placeholder="请输入邮箱" type="text" v-model.trim="formData.mail" />
-    </div>
-    <div :class="{ error: !formData.qq }" class="login-item">
-      <label for="qq">QQ号：</label>
-      <input id="qq" placeholder="请输入QQ号" type="text" v-model.trim="formData.qq" />
-    </div>
-    <div class="login-btn">
-      <div class="login-btn">
-        <van-button @click="goRegister" class="login-btn-login" type="info">
-          点击注册
-        </van-button>
-        <van-button @click="goLogin" class="login-btn-register" plain type="info">
-          前往登录
-        </van-button>
+   <v-touch v-on:swiperight="swiperright">
+      <!-- 标题栏 -->
+      <nav-bar class="login-nav">
+        <div slot="center">注册</div>
+      </nav-bar>
+      <div :class="{ error: !formData.username }" class="login-item">
+        <label for="username">用户名：</label>
+        <input id="username" placeholder="请输入用户名" type="text" v-model.trim="formData.username" />
       </div>
-    </div>
+      <div :class="{ error: !formData.password }" class="login-item">
+        <label for="password">密码：</label>
+        <input id="password" placeholder="请输入密码" type="password" v-model.trim="formData.password" />
+      </div>
+      <div :class="{ error: !formData.phone }" class="login-item">
+        <label for="phone">手机号：</label>
+        <input id="phone" placeholder="请输入手机号" type="text" v-model.trim="formData.phone" />
+      </div>
+      <div :class="{ error: !formData.mail }" class="login-item">
+        <label for="mail">邮箱：</label>
+        <input id="mail" placeholder="请输入邮箱" type="text" v-model.trim="formData.mail" />
+      </div>
+      <div :class="{ error: !formData.qq }" class="login-item">
+        <label for="qq">QQ号：</label>
+        <input id="qq" placeholder="请输入QQ号" type="text" v-model.trim="formData.qq" />
+      </div>
+      <div class="login-btn">
+        <div class="login-btn">
+          <van-button @click="goRegister" class="login-btn-login" type="info">
+            点击注册
+          </van-button>
+          <van-button @click="goLogin" class="login-btn-register" plain type="info">
+            前往登录
+          </van-button>
+        </div>
+      </div>
+   </v-touch>
   </div>
 </template>
 
@@ -109,6 +111,10 @@ export default {
     // 登录
     goLogin() {
       this.$router.push("/login");
+    },
+    // 左边侧滑返回上一页
+    swiperright: function () {
+      this.$router.go(-1);
     }
   },
   components: { NavBar }

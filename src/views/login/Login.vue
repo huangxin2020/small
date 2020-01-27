@@ -1,25 +1,27 @@
 <template>
   <div class="login">
-    <!-- 标题栏 -->
-    <nav-bar class="login-nav">
-      <div slot="center">登录</div>
-    </nav-bar>
-    <div :class="{ error: !formData.username }" class="login-item">
-      <label for="username">用户名：</label>
-      <input id="username" placeholder="请输入用户名" type="text" v-model.trim="formData.username" />
-    </div>
-    <div :class="{ error: !formData.password }" class="login-item">
-      <label for="password">密码：</label>
-      <input id="password" placeholder="请输入密码" type="password" v-model.trim="formData.password" />
-    </div>
-    <div class="login-btn">
-      <van-button @click="goLogin" class="login-btn-login" type="info">
-        点击登录
-      </van-button>
-      <van-button @click="goRegister" class="login-btn-register" plain type="info">
-        立即注册
-      </van-button>
-    </div>
+    <v-touch v-on:swiperight="swiperright" class="container">
+      <!-- 标题栏 -->
+      <nav-bar class="login-nav">
+        <div slot="center">登录</div>
+      </nav-bar>
+      <div :class="{ error: !formData.username }" class="login-item">
+        <label for="username">用户名：</label>
+        <input id="username" placeholder="请输入用户名" type="text" v-model.trim="formData.username" />
+      </div>
+      <div :class="{ error: !formData.password }" class="login-item">
+        <label for="password">密码：</label>
+        <input id="password" placeholder="请输入密码" type="password" v-model.trim="formData.password" />
+      </div>
+      <div class="login-btn">
+        <van-button @click="goLogin" class="login-btn-login" type="info">
+          点击登录
+        </van-button>
+        <van-button @click="goRegister" class="login-btn-register" plain type="info">
+          立即注册
+        </van-button>
+      </div>
+    </v-touch>
   </div>
 </template>
 
@@ -82,6 +84,10 @@ export default {
     // 注册
     goRegister() {
       this.$router.push("/register");
+    },
+    // 左边侧滑返回上一页
+    swiperright: function () {
+      this.$router.go(-1);
     }
   },
   components: { NavBar }
@@ -144,5 +150,10 @@ export default {
   justify-content: space-between;
   width: 340px;
   margin: 0 auto;
+}
+/* 设置滑动范围的宽高 */
+.container{
+  width:100vw;
+  height:100vh;
 }
 </style>

@@ -1,22 +1,24 @@
 <template>
   <div class="product-detail">
-    <product-detail-nav-bar @titleItemClick="titleItemClick" ref="detailNavBar" />
-    <scroll :probe-type="3" @backTopScroll="detailScroll" class="scroll-height" ref="scroll">
-      <detail-swiper :swiper-list="topImages" class="detail-set-scroll" />
-      <detail-base-info :goods="goods" />
-      <detail-shop-info :shop="shops" />
-      <detail-images-info :images-info="detailsInfo" @imgLoad="imgLoad" />
-      <detail-param-info :param-info="paramsInfo" class="detail-set-scroll" />
-      <detail-comment-info :comment-info="commentInfo" class="detail-set-scroll" />
-      <goods-list :goods="recommendList" :is-recommend="true" class="detail-set-scroll" />
-    </scroll>
+    <v-touch v-on:swiperight="swiperright" class="container">
+        <product-detail-nav-bar @titleItemClick="titleItemClick" ref="detailNavBar" />
+      <scroll :probe-type="3" @backTopScroll="detailScroll" class="scroll-height" ref="scroll">
+        <detail-swiper :swiper-list="topImages" class="detail-set-scroll" />
+        <detail-base-info :goods="goods" />
+        <detail-shop-info :shop="shops" />
+        <detail-images-info :images-info="detailsInfo" @imgLoad="imgLoad" />
+        <detail-param-info :param-info="paramsInfo" class="detail-set-scroll" />
+        <detail-comment-info :comment-info="commentInfo" class="detail-set-scroll" />
+        <goods-list :goods="recommendList" :is-recommend="true" class="detail-set-scroll" />
+      </scroll>
 
-    <!-- 回到顶部,监听组件的原生事件必须要用native修饰符变成原生组件 -->
-    <transition name="scroll">
-      <back-top @click.native="backTop" v-show="curPosition >= 1500" />
-    </transition>
+      <!-- 回到顶部,监听组件的原生事件必须要用native修饰符变成原生组件 -->
+      <transition name="scroll">
+        <back-top @click.native="backTop" v-show="curPosition >= 1500" />
+      </transition>
 
-    <detail-bottom-bar @addToCart="addToCart" />
+      <detail-bottom-bar @addToCart="addToCart" />
+    </v-touch>
   </div>
 </template>
 
@@ -177,6 +179,10 @@ export default {
       };
       // 2.将商品数据传到购物车页面
       this.$store.dispatch("setCateGoryData", obj);
+    },
+    // 左边侧滑返回上一页
+    swiperright: function () {
+      this.$router.go(-1);
     }
   }
 };
@@ -214,5 +220,11 @@ export default {
 .scroll-enter-to,
 .scroll-leave {
   opacity: 1;
+}
+
+/* 设置滑动范围的宽高 */
+.container{
+  width:100vw;
+  height:100vh;
 }
 </style>

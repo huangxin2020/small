@@ -1,6 +1,6 @@
 <template>
   <div class="product-detail-nav-bar">
-    <nav-bar>
+    <nav-bar class="container">
       <div @click="backHomePage" class="back-img" slot="left">
         <img alt="" src="@/assets/img/common/back.svg" />
       </div>

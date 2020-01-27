@@ -6,9 +6,16 @@ import "./assets/css/base.css";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import  VueTouch from 'vue-touch'
 
 // 引入vue的懒加载
 import VueLazyLoad from "vue-lazyload";
+
+// 引用视频滑动
+Vue.use(VueTouch,{name:'v-touch'})
+VueTouch.config.swipe = {
+  threshold:50  //设置左右滑动的距离
+}
 
 Vue.config.productionTip = false;
 
